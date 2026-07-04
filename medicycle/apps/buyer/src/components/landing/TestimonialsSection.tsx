@@ -1,55 +1,78 @@
-import { useRef } from 'react'
+import { motion } from 'framer-motion'
+import { Star } from 'lucide-react'
 
 const testimonials = [
-  { quote: "MediCycle completely transformed our ICU. The interface is intuitive and the speed is unmatched.", author: "Dr. Sarah Jenkins", role: "Chief of Surgery" },
-  { quote: "We migrated 2 million patient records in a weekend. Their data integrity guarantees are real.", author: "Michael Chen", role: "CTO, Zenith Health" },
-  { quote: "Finally, an EMR that doesn't look like it was built in 1995. Our nurses love the dark mode.", author: "Emily Davis", role: "Head of Nursing" }
+  {
+    name: "Dr. Priya Sharma",
+    role: "Head Pharmacist, Apollo Hospitals",
+    text: "MediCycle transformed how we manage pharmaceutical procurement. The real-time inventory sync alone saved us 200+ hours per quarter.",
+    initials: "PS",
+    color: "bg-emerald-500",
+  },
+  {
+    name: "Rajesh Kumar",
+    role: "Supply Chain Director, Fortis",
+    text: "The seller verification system gives us confidence in every transaction. We've reduced counterfeit risk to near zero since switching.",
+    initials: "RK",
+    color: "bg-blue-500",
+  },
+  {
+    name: "Dr. Ananya Patel",
+    role: "CEO, MedSupply Co.",
+    text: "As a seller, the dashboard analytics are incredible. I can see exactly which products are trending and price competitively in real-time.",
+    initials: "AP",
+    color: "bg-violet-500",
+  },
 ]
-
-function TestimonialCard({ t }: any) {
-  const cardRef = useRef<HTMLDivElement>(null)
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!cardRef.current) return
-    const rect = cardRef.current.getBoundingClientRect()
-    const x = e.clientX - rect.left
-    const y = e.clientY - rect.top
-    cardRef.current.style.setProperty('--x', `${x}px`)
-    cardRef.current.style.setProperty('--y', `${y}px`)
-  }
-
-  return (
-    <div 
-      ref={cardRef}
-      onMouseMove={handleMouseMove}
-      className="relative p-[1px] rounded-2xl bg-border/20 overflow-hidden group"
-    >
-      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" 
-           style={{ 
-             background: `radial-gradient(400px circle at var(--x, 50%) var(--y, 50%), hsl(var(--primary) / 0.5), transparent 40%)`
-           }} 
-      />
-      <div className="relative bg-card/90 backdrop-blur-xl h-full p-8 rounded-2xl flex flex-col justify-between">
-        <p className="text-lg italic text-muted-foreground mb-8 leading-relaxed">"{t.quote}"</p>
-        <div>
-          <div className="font-bold">{t.author}</div>
-          <div className="text-sm text-primary mt-1">{t.role}</div>
-        </div>
-      </div>
-    </div>
-  )
-}
 
 export function TestimonialsSection() {
   return (
-    <section className="py-32 relative z-10">
-      <div className="container mx-auto px-6">
-        <div className="text-center mb-20">
-          <h2 className="text-4xl font-bold">Don't just take our word for it</h2>
-        </div>
-        <div className="grid md:grid-cols-3 gap-6">
+    <section className="py-24 md:py-32 relative z-10 bg-card/30">
+      <div className="container mx-auto px-6 lg:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ type: "spring", stiffness: 100, damping: 20 }}
+          className="mb-16"
+        >
+          <p className="text-sm font-mono font-medium text-primary uppercase tracking-widest mb-3">Testimonials</p>
+          <h2 className="font-display text-3xl md:text-4xl font-bold tracking-tight max-w-lg">
+            Trusted by healthcare leaders
+          </h2>
+        </motion.div>
+
+        <div className="grid md:grid-cols-3 gap-5">
           {testimonials.map((t, i) => (
-            <TestimonialCard key={i} t={t} />
+            <motion.div
+              key={t.name}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ type: "spring", stiffness: 100, damping: 20, delay: i * 0.1 }}
+              className="surface rounded-2xl p-6 md:p-8 hover:border-primary/20 transition-colors"
+            >
+              {/* Stars */}
+              <div className="flex gap-0.5 mb-5">
+                {[...Array(5)].map((_, j) => (
+                  <Star key={j} className="w-3.5 h-3.5 fill-primary text-primary" />
+                ))}
+              </div>
+
+              <p className="text-sm text-muted-foreground leading-relaxed mb-6">
+                &ldquo;{t.text}&rdquo;
+              </p>
+
+              <div className="flex items-center gap-3 pt-4 border-t border-border">
+                <div className={`w-9 h-9 rounded-full ${t.color} flex items-center justify-center text-[11px] font-bold text-white`}>
+                  {t.initials}
+                </div>
+                <div>
+                  <p className="text-sm font-medium">{t.name}</p>
+                  <p className="text-xs text-muted-foreground">{t.role}</p>
+                </div>
+              </div>
+            </motion.div>
           ))}
         </div>
       </div>
