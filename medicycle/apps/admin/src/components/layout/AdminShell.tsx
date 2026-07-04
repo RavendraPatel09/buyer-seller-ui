@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   ShieldCheck, Activity, Users, FileText, AlertTriangle, 
-  ClipboardList, Menu, LogOut, Download
+  ClipboardList, Menu, LogOut, Download, Search, Command
 } from "lucide-react";
 import { cn } from "@medicycle/utils";
 import { Button } from "@medicycle/ui";
@@ -25,6 +25,7 @@ const NAV_ITEMS = [
 
 export function AdminShell({ children }: AdminShellProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [searchFocused, setSearchFocused] = useState(false);
   const location = useLocation();
   const { user, clearAuth } = useAdminAuth();
 
@@ -35,20 +36,22 @@ export function AdminShell({ children }: AdminShellProps) {
 
   const SidebarContent = () => (
     <div className="flex flex-col h-full bg-background border-r border-border/50">
-      {/* Branding */}
-      <div className="p-6 flex items-center space-x-3 border-b border-border/30">
-        <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-          <ShieldCheck className="w-6 h-6 text-primary" />
-        </div>
-        <div>
-          <span className="text-lg font-bold tracking-tight block leading-tight">MediCycle</span>
-          <span className="text-[10px] font-semibold text-primary uppercase tracking-widest">Admin Console</span>
-        </div>
+      {/* Brand */}
+      <div className="h-16 flex items-center px-6 border-b border-border/50">
+        <Link to="/" className="flex items-center gap-2 transition-opacity hover:opacity-80">
+          <div className="w-6 h-6 rounded-md bg-destructive/10 border border-destructive/20 flex items-center justify-center">
+            <ShieldCheck className="w-3.5 h-3.5 text-destructive" />
+          </div>
+          <span className="font-display font-bold text-sm tracking-tight">MediCycle</span>
+          <span className="ml-2 px-1.5 py-0.5 rounded text-[10px] font-mono font-medium bg-destructive/10 text-destructive uppercase tracking-widest border border-destructive/20">
+            Admin
+          </span>
+        </Link>
       </div>
       
-      {/* Navigation */}
+      {/* Nav */}
       <div className="flex-1 px-4 py-6 space-y-1 overflow-y-auto">
-        <div className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest mb-4 px-3">
+        <div className="text-[10px] font-mono font-medium text-muted-foreground uppercase tracking-widest mb-4 px-3">
           Management
         </div>
         {NAV_ITEMS.map((item) => {
@@ -62,53 +65,55 @@ export function AdminShell({ children }: AdminShellProps) {
               to={item.path}
               onClick={() => setIsMobileMenuOpen(false)}
               className={cn(
-                "flex items-center space-x-3 px-3 py-2.5 rounded-xl transition-all duration-200 group relative",
-                isActive ? "text-primary" : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                "flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 group relative text-sm font-medium",
+                isActive 
+                  ? "text-primary-foreground" 
+                  : "text-muted-foreground hover:text-foreground hover:bg-card border border-transparent hover:border-border/50"
               )}
             >
               {isActive && (
                 <motion.div
-                  layoutId="admin-shell-active"
-                  className="absolute inset-0 bg-primary/10 rounded-xl"
+                  layoutId="admin-sidebar-active"
+                  className="absolute inset-0 bg-primary rounded-lg shadow-glow-sm"
                   initial={false}
                   transition={{ type: "spring", stiffness: 300, damping: 30 }}
                 />
               )}
-              <item.icon className={cn("w-5 h-5 relative z-10", isActive && "fill-primary/20")} />
-              <span className="font-medium text-sm relative z-10">{item.name}</span>
+              <item.icon className={cn("w-4 h-4 relative z-10", isActive && "text-primary-foreground")} />
+              <span className="relative z-10">{item.name}</span>
             </Link>
           );
         })}
       </div>
 
-      {/* User & Logout */}
+      {/* Footer Nav */}
       <div className="p-4 border-t border-border/50 space-y-3">
         {user && (
-          <div className="px-3 py-2 bg-muted/30 rounded-xl flex items-center space-x-3">
-            <div className="w-8 h-8 rounded-full bg-primary/20 border border-primary/40 flex items-center justify-center font-bold text-primary text-xs">
+          <div className="px-3 py-2.5 bg-card border border-border/50 rounded-lg flex items-center gap-3">
+            <div className="w-7 h-7 rounded-md bg-primary/10 border border-primary/20 flex items-center justify-center font-bold text-primary text-xs">
               {user.name.charAt(0)}
             </div>
             <div className="min-w-0 flex-1">
-              <div className="text-sm font-medium truncate">{user.name}</div>
-              <div className="text-[10px] text-muted-foreground uppercase tracking-wide">{user.role.replace('_', ' ')}</div>
+              <div className="text-xs font-medium truncate">{user.name}</div>
+              <div className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider">{user.role.replace('_', ' ')}</div>
             </div>
           </div>
         )}
         <button 
           onClick={handleLogout}
-          className="flex items-center space-x-3 px-3 py-2.5 rounded-xl text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors w-full"
+          className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors w-full group border border-transparent hover:border-destructive/20"
         >
-          <LogOut className="w-5 h-5" />
-          <span className="font-medium text-sm">Sign Out</span>
+          <LogOut className="w-4 h-4 group-hover:text-destructive transition-colors" />
+          <span>Sign Out</span>
         </button>
       </div>
     </div>
   );
 
   return (
-    <div className="min-h-screen bg-background text-foreground flex">
+    <div className="min-h-screen bg-background text-foreground flex selection:bg-primary/30">
       {/* Desktop Sidebar */}
-      <aside className="hidden lg:block w-72 h-screen sticky top-0 shrink-0">
+      <aside className="hidden lg:block w-[260px] h-screen sticky top-0 shrink-0 z-40">
         <SidebarContent />
       </aside>
 
@@ -128,7 +133,7 @@ export function AdminShell({ children }: AdminShellProps) {
               animate={{ x: 0 }}
               exit={{ x: "-100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed inset-y-0 left-0 w-72 z-50 lg:hidden shadow-2xl"
+              className="fixed inset-y-0 left-0 w-[260px] z-50 lg:hidden shadow-2xl border-r border-border"
             >
               <SidebarContent />
             </motion.aside>
@@ -136,31 +141,42 @@ export function AdminShell({ children }: AdminShellProps) {
         )}
       </AnimatePresence>
 
-      {/* Main Content */}
+      {/* Main Content Area */}
       <main className="flex-1 flex flex-col min-w-0">
         {/* Header */}
-        <header className="h-16 lg:h-20 bg-background/95 backdrop-blur-xl border-b border-border/50 sticky top-0 z-30 px-4 lg:px-8 flex items-center justify-between shrink-0">
-          <div className="flex items-center">
+        <header className="h-16 bg-background/80 backdrop-blur-xl backdrop-saturate-150 border-b border-border/50 sticky top-0 z-30 px-4 lg:px-8 flex items-center justify-between shrink-0">
+          <div className="flex items-center gap-4">
             <button 
-              className="lg:hidden p-2 mr-4 text-muted-foreground hover:text-foreground rounded-lg hover:bg-muted"
+              className="lg:hidden p-1.5 text-muted-foreground hover:text-foreground rounded-md hover:bg-card border border-transparent hover:border-border transition-all"
               onClick={() => setIsMobileMenuOpen(true)}
-              aria-label="Open menu"
             >
-              <Menu className="w-6 h-6" />
+              <Menu className="w-5 h-5" />
             </button>
-            <h2 className="text-lg font-bold tracking-tight hidden md:block">System Overview</h2>
+            <h2 className="text-sm font-display font-bold tracking-tight hidden md:block text-muted-foreground">System Overview</h2>
           </div>
           
-          <div className="flex items-center space-x-3">
+          <div className="flex items-center gap-3">
+            {/* Command Palette trigger */}
+            <button
+              onClick={() => setSearchFocused(!searchFocused)}
+              className="hidden md:flex items-center gap-2 h-9 px-3 rounded-lg border border-border bg-card/50 text-sm text-muted-foreground hover:text-foreground hover:border-primary/30 transition-all w-64"
+            >
+              <Search className="w-4 h-4" />
+              <span className="flex-1 text-left">Search records...</span>
+              <kbd className="inline-flex h-5 items-center gap-0.5 rounded bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground border border-border">
+                <Command className="w-2.5 h-2.5" />K
+              </kbd>
+            </button>
+
             <ThemeToggle />
-            <Button variant="outline" className="h-9 text-xs hidden sm:inline-flex">
-              <Download className="w-4 h-4 mr-2" /> Export Reports
+            <Button variant="outline" size="sm" className="hidden sm:flex gap-2">
+              <Download className="w-4 h-4" /> Export
             </Button>
           </div>
         </header>
 
         {/* Page Content */}
-        <div className="flex-1 p-4 lg:p-8 overflow-y-auto">
+        <div className="flex-1 p-6 lg:p-10 overflow-y-auto">
           {children}
         </div>
       </main>
