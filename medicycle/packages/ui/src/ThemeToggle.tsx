@@ -1,10 +1,12 @@
 import { Moon, Sun } from "lucide-react";
-import { useTheme } from "../../lib/theme/ThemeContext";
-import { Button } from "../../design-system/components/Button/Button";
+import { Button } from "./Button/Button";
 
-export function ThemeToggle() {
-  const { theme, setTheme } = useTheme();
+interface ThemeToggleProps {
+  theme: string;
+  setTheme: (theme: string) => void;
+}
 
+export function ThemeToggle({ theme, setTheme }: ThemeToggleProps) {
   return (
     <Button
       variant="outline"
