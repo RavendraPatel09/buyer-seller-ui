@@ -1,4 +1,4 @@
-import { Moon, Sun } from "lucide";
+import { Moon, Sun } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "./Button/Button";
 
