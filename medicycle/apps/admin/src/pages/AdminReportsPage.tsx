@@ -3,9 +3,9 @@ import { motion } from 'framer-motion';
 import { ShieldAlert, CheckCircle2, XCircle, ChevronRight } from 'lucide-react';
 import { AdminShell } from '../components/layout/AdminShell';
 import { reportService } from '../api/adminService';
-import { Button } from '../../design-system/components/Button/Button';
-import { cn } from '../../design-system/utils/cn';
-import { SEO } from '../../lib/seo/SEO';
+import { Button } from "@medicycle/ui";
+import { cn } from "@medicycle/utils";
+import { SEO } from "../lib/seo/SEO";
 
 const SEVERITY_STYLES: Record<string, string> = {
   critical: 'bg-destructive text-white',

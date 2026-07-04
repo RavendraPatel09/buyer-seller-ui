@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { ClipboardList, Shield } from 'lucide-react';
 import { AdminShell } from '../components/layout/AdminShell';
 import { auditService } from '../api/adminService';
-import { SEO } from '../../lib/seo/SEO';
+import { SEO } from "../lib/seo/SEO";
 
 const rowVariants = { hidden: { opacity: 0, x: -20 }, show: { opacity: 1, x: 0 } };
 

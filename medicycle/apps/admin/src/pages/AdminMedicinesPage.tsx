@@ -4,8 +4,8 @@ import { motion } from 'framer-motion';
 import { Search, Check, X, Flag, Eye } from 'lucide-react';
 import { AdminShell } from '../components/layout/AdminShell';
 import { listingService } from '../api/adminService';
-import { cn } from '../../design-system/utils/cn';
-import { SEO } from '../../lib/seo/SEO';
+import { cn } from "@medicycle/utils";
+import { SEO } from "../lib/seo/SEO";
 import type { MedicineListing } from '../types';
 
 const rowVariants = { hidden: { opacity: 0, x: -20 }, show: { opacity: 1, x: 0 } };

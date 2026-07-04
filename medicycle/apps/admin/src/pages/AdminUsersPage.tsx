@@ -4,9 +4,9 @@ import { motion } from 'framer-motion';
 import { Search, Check, X, Ban, ShieldCheck, MoreHorizontal, Trash2 } from 'lucide-react';
 import { AdminShell } from '../components/layout/AdminShell';
 import { userService } from '../api/adminService';
-import { Button } from '../../design-system/components/Button/Button';
-import { cn } from '../../design-system/utils/cn';
-import { SEO } from '../../lib/seo/SEO';
+import { Button } from "@medicycle/ui";
+import { cn } from "@medicycle/utils";
+import { SEO } from "../lib/seo/SEO";
 import type { PlatformUser } from '../types';
 
 const rowVariants = { hidden: { opacity: 0, x: -20 }, show: { opacity: 1, x: 0 } };

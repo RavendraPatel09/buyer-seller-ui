@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { useAdminAuth } from '../store/authStore';
 import { authService } from '../api/adminService';
-import { LoadingScreen } from '../../components/common/LoadingScreen';
+import { LoadingScreen } from "@medicycle/ui";
 
 export function AdminRouteGuard() {
   const { isAuthenticated, isLoading, setAuth, clearAuth, setLoading } = useAdminAuth();

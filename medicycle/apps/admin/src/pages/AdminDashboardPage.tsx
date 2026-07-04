@@ -4,8 +4,8 @@ import { AreaChart, Area, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, R
 import { Users, DollarSign, Package, Flag, ShieldAlert, TrendingUp, MessageSquare, UploadCloud } from 'lucide-react';
 import { AdminShell } from '../components/layout/AdminShell';
 import { dashboardService } from '../api/adminService';
-import { cn } from '../../design-system/utils/cn';
-import { SEO } from '../../lib/seo/SEO';
+import { cn } from "@medicycle/utils";
+import { SEO } from "../lib/seo/SEO";
 
 const stagger = { hidden: { opacity: 0 }, show: { opacity: 1, transition: { staggerChildren: 0.08 } } };
 const fadeUp = { hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0 } };
