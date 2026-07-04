@@ -8,10 +8,8 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
   icon?: React.ReactNode
 }
 
-const spring = { type: "spring" as const, stiffness: 500, damping: 25 }
-
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, type, label, error, icon, id, ...props }, ref) => {
+  ({ className, type, label, error, icon, id, onFocus, onBlur, ...props }, ref) => {
     const [isFocused, setIsFocused] = React.useState(false)
     const inputId = id || React.useId()
 
@@ -37,20 +35,18 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
               {icon}
             </div>
           )}
-          <motion.input
+          <input
             id={inputId}
             type={type}
             ref={ref}
             onFocus={(e) => {
               setIsFocused(true)
-              props.onFocus?.(e)
+              onFocus?.(e)
             }}
             onBlur={(e) => {
               setIsFocused(false)
-              props.onBlur?.(e)
+              onBlur?.(e)
             }}
-            animate={error ? { x: [0, -6, 6, -6, 6, 0] } : {}}
-            transition={{ duration: 0.4, ease: "easeInOut" }}
             className={cn(
               "flex h-12 w-full rounded-lg px-4 py-2 text-sm font-medium",
               "bg-card border border-border",
@@ -68,14 +64,13 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           />
           {/* Focus line indicator */}
           <motion.div
-            className="absolute bottom-0 left-1/2 h-[2px] bg-primary rounded-full"
+            className="absolute bottom-0 left-2 right-2 h-[2px] bg-primary rounded-full"
             initial={false}
             animate={{
-              width: isFocused ? "calc(100% - 16px)" : "0%",
-              x: isFocused ? "calc(-50% + 8px)" : "-50%",
+              scaleX: isFocused ? 1 : 0,
               opacity: isFocused ? 1 : 0,
             }}
-            transition={spring}
+            transition={{ type: "spring", stiffness: 500, damping: 25 }}
           />
         </div>
         {error && (

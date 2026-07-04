@@ -8,7 +8,7 @@ export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const Card = React.forwardRef<HTMLDivElement, CardProps>(
-  ({ className, glass, interactive, onMouseMove, onMouseLeave, children, ...props }, ref) => {
+  ({ className, glass, interactive, children, ...props }, ref) => {
     const mouseX = useMotionValue(0)
     const mouseY = useMotionValue(0)
     const springX = useSpring(mouseX, { stiffness: 300, damping: 30 })
@@ -20,26 +20,22 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
       const rect = e.currentTarget.getBoundingClientRect()
       mouseX.set(e.clientX - rect.left)
       mouseY.set(e.clientY - rect.top)
-      onMouseMove?.(e)
     }
 
     const handleMouseLeave = (e: React.MouseEvent<HTMLDivElement>) => {
       mouseX.set(e.currentTarget.offsetWidth / 2)
       mouseY.set(e.currentTarget.offsetHeight / 2)
-      onMouseLeave?.(e)
     }
 
     if (interactive) {
       return (
-        <motion.div
+        <div
           ref={ref}
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
-          whileHover={{ y: -2 }}
-          transition={{ type: "spring", stiffness: 300, damping: 25 }}
           className={cn(
             "relative overflow-hidden rounded-xl border border-border bg-card text-card-foreground",
-            "transition-colors duration-200 hover:border-primary/20",
+            "transition-all duration-200 hover:border-primary/20 hover:-translate-y-0.5",
             glass && "glass-panel bg-transparent",
             className
           )}
@@ -51,7 +47,7 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
             style={{ background: spotlight }}
           />
           <div className="relative z-10">{children}</div>
-        </motion.div>
+        </div>
       )
     }
 

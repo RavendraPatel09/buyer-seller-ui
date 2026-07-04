@@ -2,28 +2,11 @@ import { motion } from "framer-motion"
 
 const ecgPath = "M 0 50 L 15 50 L 20 50 L 25 20 L 30 80 L 35 50 L 40 50 L 50 50 L 55 50 L 60 50 L 65 20 L 70 80 L 75 50 L 80 50 L 90 50 L 95 50 L 100 50"
 
-const letterVariants = {
-  hidden: { opacity: 0, y: 20, filter: "blur(8px)" },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    filter: "blur(0px)",
-    transition: {
-      delay: 0.3 + i * 0.06,
-      type: "spring",
-      stiffness: 200,
-      damping: 20,
-    },
-  }),
-}
-
 export function LoadingScreen() {
   const letters = "MediCycle".split("")
 
   return (
     <div className="min-h-screen bg-background flex flex-col items-center justify-center relative overflow-hidden">
-      {/* Ambient dot grid is inherited from body */}
-
       {/* ECG Waveform */}
       <div className="w-48 h-12 mb-8 relative">
         <svg viewBox="0 0 100 100" className="w-full h-full" preserveAspectRatio="none">
@@ -49,8 +32,7 @@ export function LoadingScreen() {
             strokeWidth="6"
             strokeLinecap="round"
             strokeLinejoin="round"
-            opacity="0.15"
-            filter="blur(4px)"
+            opacity={0.15}
             initial={{ pathLength: 0 }}
             animate={{ pathLength: 1 }}
             transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
@@ -63,10 +45,14 @@ export function LoadingScreen() {
         {letters.map((letter, i) => (
           <motion.span
             key={i}
-            custom={i}
-            variants={letterVariants}
-            initial="hidden"
-            animate="visible"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              delay: 0.3 + i * 0.06,
+              type: "spring" as const,
+              stiffness: 200,
+              damping: 20,
+            }}
             className="text-2xl font-display font-bold tracking-tight text-foreground"
           >
             {letter}
