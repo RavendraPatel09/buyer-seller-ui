@@ -2,15 +2,16 @@ import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Link, useNavigate } from "react-router-dom"
-import { motion } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 import { loginSchema, type LoginInput } from "../../lib/validations/auth.schema"
 import { AuthLayout } from "../../layouts/AuthLayout"
 import { Input } from "@medicycle/ui"
 import { Button } from "@medicycle/ui"
-import { Loader2 } from "lucide-react"
+import { Mail, Lock, CheckCircle2 } from "lucide-react"
 
 export function Login() {
   const [isLoading, setIsLoading] = useState(false)
+  const [isSuccess, setIsSuccess] = useState(false)
   const navigate = useNavigate()
   
   const { register, handleSubmit, formState: { errors } } = useForm<LoginInput>({
@@ -22,48 +23,83 @@ export function Login() {
     // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 1500))
     setIsLoading(false)
-    navigate("/verify-otp")
+    setIsSuccess(true)
+    
+    // Brief delay to show success animation before redirect
+    setTimeout(() => navigate("/verify-otp"), 800)
   }
 
   return (
     <AuthLayout title="Welcome back" subtitle="Enter your credentials to access your account.">
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         
-        <div className="space-y-2">
-          <label className="text-sm font-medium">Email address</label>
-          <motion.div animate={errors.email ? { x: [-10, 10, -10, 10, 0] } : {}} transition={{ duration: 0.4 }}>
-            <Input 
-              {...register("email")} 
-              type="email" 
-              placeholder="name@example.com"
-              className={errors.email ? "border-destructive focus-visible:ring-destructive" : ""}
-            />
-          </motion.div>
-          {errors.email && <p className="text-sm text-destructive">{errors.email.message}</p>}
+        <div className="space-y-1 relative">
+          <Input 
+            {...register("email")} 
+            type="email" 
+            label="Email address"
+            placeholder="name@example.com"
+            icon={<Mail className="w-4 h-4" />}
+            error={errors.email?.message}
+          />
         </div>
 
-        <div className="space-y-2">
-          <div className="flex justify-between items-center">
-            <label className="text-sm font-medium">Password</label>
-            <Link to="/forgot-password" className="text-sm text-primary hover:underline">Forgot password?</Link>
+        <div className="space-y-1 relative">
+          <div className="flex justify-between items-center absolute top-0 right-0 z-10">
+            <Link to="/forgot-password" className="text-xs font-medium text-primary hover:underline transition-all hover:opacity-80">
+              Forgot password?
+            </Link>
           </div>
-          <motion.div animate={errors.password ? { x: [-10, 10, -10, 10, 0] } : {}} transition={{ duration: 0.4 }}>
-            <Input 
-              {...register("password")} 
-              type="password" 
-              placeholder="••••••••"
-              className={errors.password ? "border-destructive focus-visible:ring-destructive" : ""}
-            />
-          </motion.div>
-          {errors.password && <p className="text-sm text-destructive">{errors.password.message}</p>}
+          <Input 
+            {...register("password")} 
+            type="password"
+            label="Password"
+            placeholder="••••••••"
+            icon={<Lock className="w-4 h-4" />}
+            error={errors.password?.message}
+          />
         </div>
 
-        <Button type="submit" className="w-full mt-6" disabled={isLoading}>
-          {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : "Sign in"}
+        <Button 
+          type="submit" 
+          className="w-full h-12 mt-2 group relative overflow-hidden" 
+          disabled={isLoading || isSuccess}
+          loading={isLoading}
+        >
+          <AnimatePresence mode="wait">
+            {isSuccess ? (
+              <motion.div
+                key="success"
+                initial={{ opacity: 0, scale: 0.5 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                className="flex items-center gap-2"
+              >
+                <CheckCircle2 className="w-5 h-5" />
+                <span>Authenticated</span>
+              </motion.div>
+            ) : !isLoading ? (
+              <motion.div
+                key="default"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="flex items-center gap-2"
+              >
+                <span>Sign in securely</span>
+                <svg width="12" height="12" viewBox="0 0 12 12" className="transition-transform group-hover:translate-x-1" fill="none">
+                  <path d="M4 2L8 6L4 10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </motion.div>
+            ) : null}
+          </AnimatePresence>
         </Button>
 
         <div className="text-center mt-6 text-sm text-muted-foreground">
-          Don't have an account? <Link to="/register" className="text-primary hover:underline font-medium">Sign up</Link>
+          Don't have an account?{' '}
+          <Link to="/register" className="text-foreground font-semibold hover:text-primary transition-colors hover:underline">
+            Request access
+          </Link>
         </div>
       </form>
     </AuthLayout>
