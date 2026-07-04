@@ -173,8 +173,8 @@ export function MedicineDetails() {
           <div className="pt-16 border-t border-border/50">
             <h2 className="text-2xl font-bold tracking-tight mb-8">Similar Products</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {relatedMedicines.map((med) => (
-                <MedicineCard key={med.id} medicine={med} />
+              {relatedMedicines.map((medicine, i) => (
+                <MedicineCard key={medicine.id} medicine={medicine} index={i} />
               ))}
             </div>
           </div>
