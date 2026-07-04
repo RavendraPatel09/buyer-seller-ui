@@ -1,5 +1,5 @@
 import * as React from "react"
-import { cn } from "../../utils/cn"
+import { cn } from "@medicycle/utils"
 
 const Table = React.forwardRef<HTMLTableElement, React.HTMLAttributes<HTMLTableElement>>(
   ({ className, ...props }, ref) => (

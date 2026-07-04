@@ -1,5 +1,5 @@
 import * as React from "react"
-import { cn } from "../../utils/cn"
+import { cn } from "@medicycle/utils"
 
 const Navbar = React.forwardRef<HTMLElement, React.HTMLAttributes<HTMLElement>>(
   ({ className, ...props }, ref) => (

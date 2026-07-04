@@ -1,5 +1,5 @@
 import * as React from "react"
-import { cn } from "../../utils/cn"
+import { cn } from "@medicycle/utils"
 import { motion, type HTMLMotionProps } from "framer-motion"
 
 export interface AlertProps extends HTMLMotionProps<"div"> {

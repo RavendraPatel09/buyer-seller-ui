@@ -1,5 +1,5 @@
 import * as React from "react"
-import { cn } from "../../utils/cn"
+import { cn } from "@medicycle/utils"
 
 export function LineChart({ className }: React.HTMLAttributes<HTMLDivElement>) {
   return (

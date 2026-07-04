@@ -1,6 +1,6 @@
 import * as React from "react"
 import { motion, type HTMLMotionProps } from "framer-motion"
-import { cn } from "../../utils/cn"
+import { cn } from "@medicycle/utils"
 import { X } from "lucide-react"
 
 export interface ToastProps extends HTMLMotionProps<"div"> {

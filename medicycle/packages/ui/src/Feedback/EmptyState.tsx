@@ -1,5 +1,5 @@
 import * as React from "react"
-import { cn } from "../../utils/cn"
+import { cn } from "@medicycle/utils"
 import { Inbox } from "lucide-react"
 
 export interface EmptyStateProps extends React.HTMLAttributes<HTMLDivElement> {

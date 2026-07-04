@@ -1,6 +1,6 @@
 import * as React from "react"
 import { motion, type HTMLMotionProps } from "framer-motion"
-import { cn } from "../../utils/cn"
+import { cn } from "@medicycle/utils"
 
 export interface ButtonProps extends HTMLMotionProps<"button"> {
   variant?: "default" | "destructive" | "outline" | "secondary" | "ghost" | "link" | "glass"
