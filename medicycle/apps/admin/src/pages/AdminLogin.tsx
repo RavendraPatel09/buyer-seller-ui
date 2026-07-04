@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ShieldCheck, Loader2, AlertCircle } from 'lucide-react';
 import { Button } from "@medicycle/ui";
-import { useAdminAuth } from '../../store/authStore';
-import { authService } from '../../api/adminService';
+import { useAdminAuth } from '../store/authStore';
+import { authService } from '../api/adminService';
 
 export function AdminLogin() {
   const [email, setEmail] = useState('');
