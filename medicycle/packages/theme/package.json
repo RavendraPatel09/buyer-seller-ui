@@ -1,0 +1,10 @@
+{
+  "name": "@medicycle/theme",
+  "version": "1.0.0",
+  "private": true,
+  "main": "tailwind.config.ts",
+  "exports": {
+    "./index.css": "./index.css",
+    "./tailwind.config": "./tailwind.config.ts"
+  }
+}
