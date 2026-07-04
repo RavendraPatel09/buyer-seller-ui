@@ -1,4 +1,5 @@
-import { Moon, Sun } from "lucide-react";
+import { Moon, Sun } from "lucide";
+import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "./Button/Button";
 
 interface ThemeToggleProps {
@@ -7,15 +8,48 @@ interface ThemeToggleProps {
 }
 
 export function ThemeToggle({ theme, setTheme }: ThemeToggleProps) {
+  const isDark = theme === "dark";
+
+  const toggle = () => {
+    // Add transitioning class for smooth CSS transitions
+    document.documentElement.classList.add("theme-transitioning");
+    setTheme(isDark ? "light" : "dark");
+    setTimeout(() => {
+      document.documentElement.classList.remove("theme-transitioning");
+    }, 350);
+  };
+
   return (
     <Button
-      variant="outline"
-      className="w-9 h-9 p-0 rounded-full bg-background/50 backdrop-blur border border-border/50 hover:bg-muted relative flex items-center justify-center overflow-hidden"
-      onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+      variant="ghost"
+      size="icon"
+      onClick={toggle}
+      className="relative w-9 h-9 rounded-full"
+      aria-label="Toggle theme"
     >
-      <Sun className="h-4 w-4 transition-all duration-300 absolute scale-100 rotate-0 dark:scale-0 dark:-rotate-90" />
-      <Moon className="h-4 w-4 transition-all duration-300 absolute scale-0 rotate-90 dark:scale-100 dark:rotate-0" />
-      <span className="sr-only">Toggle theme</span>
+      <AnimatePresence mode="wait">
+        {isDark ? (
+          <motion.div
+            key="sun"
+            initial={{ scale: 0, rotate: -90 }}
+            animate={{ scale: 1, rotate: 0 }}
+            exit={{ scale: 0, rotate: 90 }}
+            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+          >
+            <Sun className="h-4 w-4" />
+          </motion.div>
+        ) : (
+          <motion.div
+            key="moon"
+            initial={{ scale: 0, rotate: 90 }}
+            animate={{ scale: 1, rotate: 0 }}
+            exit={{ scale: 0, rotate: -90 }}
+            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+          >
+            <Moon className="h-4 w-4" />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </Button>
   );
 }

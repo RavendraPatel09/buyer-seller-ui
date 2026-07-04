@@ -1,25 +1,98 @@
-import { motion } from "framer-motion";
-import { HeartPulse } from "lucide-react";
+import { motion } from "framer-motion"
+
+const ecgPath = "M 0 50 L 15 50 L 20 50 L 25 20 L 30 80 L 35 50 L 40 50 L 50 50 L 55 50 L 60 50 L 65 20 L 70 80 L 75 50 L 80 50 L 90 50 L 95 50 L 100 50"
+
+const letterVariants = {
+  hidden: { opacity: 0, y: 20, filter: "blur(8px)" },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: {
+      delay: 0.3 + i * 0.06,
+      type: "spring",
+      stiffness: 200,
+      damping: 20,
+    },
+  }),
+}
 
 export function LoadingScreen() {
+  const letters = "MediCycle".split("")
+
   return (
-    <div className="min-h-screen bg-background flex flex-col items-center justify-center">
-      <motion.div
-        animate={{ 
-          scale: [1, 1.2, 1],
-          opacity: [0.5, 1, 0.5]
-        }}
-        transition={{ 
-          duration: 2,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-        className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mb-6"
+    <div className="min-h-screen bg-background flex flex-col items-center justify-center relative overflow-hidden">
+      {/* Ambient dot grid is inherited from body */}
+
+      {/* ECG Waveform */}
+      <div className="w-48 h-12 mb-8 relative">
+        <svg viewBox="0 0 100 100" className="w-full h-full" preserveAspectRatio="none">
+          <motion.path
+            d={ecgPath}
+            fill="none"
+            stroke="hsl(var(--primary))"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            initial={{ pathLength: 0, opacity: 0.4 }}
+            animate={{ pathLength: 1, opacity: [0.4, 1, 0.4] }}
+            transition={{
+              pathLength: { duration: 1.5, repeat: Infinity, ease: "easeInOut" },
+              opacity: { duration: 1.5, repeat: Infinity, ease: "easeInOut" },
+            }}
+          />
+          {/* Glow trail */}
+          <motion.path
+            d={ecgPath}
+            fill="none"
+            stroke="hsl(var(--primary))"
+            strokeWidth="6"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            opacity="0.15"
+            filter="blur(4px)"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+          />
+        </svg>
+      </div>
+
+      {/* Brand Name — staggered letter reveal */}
+      <div className="flex items-center gap-[1px]">
+        {letters.map((letter, i) => (
+          <motion.span
+            key={i}
+            custom={i}
+            variants={letterVariants}
+            initial="hidden"
+            animate="visible"
+            className="text-2xl font-display font-bold tracking-tight text-foreground"
+          >
+            {letter}
+          </motion.span>
+        ))}
+      </div>
+
+      {/* Subtle progress bar */}
+      <div className="w-32 h-[2px] bg-border rounded-full mt-6 overflow-hidden">
+        <motion.div
+          className="h-full bg-primary rounded-full"
+          initial={{ width: "0%" }}
+          animate={{ width: "100%" }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+        />
+      </div>
+
+      {/* Subtitle */}
+      <motion.p
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1 }}
+        className="text-xs text-muted-foreground mt-4 tracking-wide uppercase font-medium"
       >
-        <HeartPulse className="w-10 h-10 text-primary" />
-      </motion.div>
-      <h2 className="text-xl font-bold tracking-tight text-foreground">Loading MediCycle...</h2>
-      <p className="text-sm text-muted-foreground mt-2">Preparing your workspace</p>
+        Preparing your workspace
+      </motion.p>
     </div>
-  );
+  )
 }
