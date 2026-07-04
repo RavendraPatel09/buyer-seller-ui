@@ -67,7 +67,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           ) : null}
         </AnimatePresence>
         <span className={cn("inline-flex items-center gap-2", loading && "invisible")}>
-          {children}
+          {children as React.ReactNode}
         </span>
       </motion.button>
     )
