@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { cn } from "@medicycle/utils";
 
 const categories = ["All", "Cardiology", "Neurology", "Oncology", "Pediatrics", "Dermatology", "General"];
@@ -9,21 +10,31 @@ interface CategoryChipsProps {
 
 export function CategoryChips({ selected, onSelect }: CategoryChipsProps) {
   return (
-    <div className="flex space-x-2 overflow-x-auto pb-2 scrollbar-hide">
-      {categories.map(cat => (
-        <button
-          key={cat}
-          onClick={() => onSelect(cat)}
-          className={cn(
-            "px-6 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all border",
-            selected === cat 
-              ? "bg-primary text-primary-foreground border-primary shadow-glow" 
-              : "bg-card/50 border-border/50 hover:border-primary/50 text-muted-foreground hover:text-foreground"
-          )}
-        >
-          {cat}
-        </button>
-      ))}
+    <div className="flex items-center space-x-1.5 overflow-x-auto pb-4 scrollbar-hide -mx-6 px-6 lg:mx-0 lg:px-0">
+      {categories.map(cat => {
+        const isSelected = selected === cat;
+        return (
+          <button
+            key={cat}
+            onClick={() => onSelect(cat)}
+            className={cn(
+              "relative px-5 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors",
+              isSelected 
+                ? "text-primary-foreground" 
+                : "text-muted-foreground hover:text-foreground bg-card/30 hover:bg-card border border-border/50"
+            )}
+          >
+            {isSelected && (
+              <motion.div
+                layoutId="category-chip"
+                className="absolute inset-0 bg-primary rounded-full shadow-glow-sm"
+                transition={{ type: "spring", stiffness: 300, damping: 25 }}
+              />
+            )}
+            <span className="relative z-10">{cat}</span>
+          </button>
+        )
+      })}
     </div>
   );
 }
