@@ -1,4 +1,4 @@
-import { cn } from "../../design-system/utils/cn"
+import { cn } from "@medicycle/utils"
 
 export function PasswordStrength({ password }: { password?: string }) {
   const p = password || ""

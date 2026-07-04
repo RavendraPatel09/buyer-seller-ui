@@ -7,7 +7,7 @@ import { SellerCard } from "../../components/marketplace/SellerCard";
 import { AnimatedTabs } from "../../components/marketplace/AnimatedTabs";
 import { ReviewList } from "../../components/marketplace/ReviewList";
 import { MedicineCard } from "../../components/marketplace/MedicineCard";
-import { Button } from "../../design-system/components/Button/Button";
+import { Button } from "@medicycle/ui";
 import { ArrowLeft, Heart, ShoppingCart, Clock, ShieldCheck, Tag } from "lucide-react";
 
 export function MedicineDetails() {

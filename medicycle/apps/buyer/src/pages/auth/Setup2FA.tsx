@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { AuthLayout } from "../../layouts/AuthLayout"
 import { OTPInput } from "../../components/auth/OTPInput"
-import { Button } from "../../design-system/components/Button/Button"
+import { Button } from "@medicycle/ui"
 import { Loader2, QrCode } from "lucide-react"
 
 export function Setup2FA() {

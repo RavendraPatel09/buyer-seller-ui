@@ -3,7 +3,7 @@ import { useNavigate, Link } from "react-router-dom"
 import { motion, AnimatePresence } from "framer-motion"
 import { AuthLayout } from "../../layouts/AuthLayout"
 import { OTPInput } from "../../components/auth/OTPInput"
-import { Button } from "../../design-system/components/Button/Button"
+import { Button } from "@medicycle/ui"
 import { Loader2, ArrowLeft } from "lucide-react"
 
 export function VerifyOTP() {

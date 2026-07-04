@@ -5,8 +5,8 @@ import { Link } from "react-router-dom"
 import { motion, AnimatePresence } from "framer-motion"
 import { forgotPasswordSchema, type ForgotPasswordInput } from "../../lib/validations/auth.schema"
 import { AuthLayout } from "../../layouts/AuthLayout"
-import { Input } from "../../design-system/components/Input/Input"
-import { Button } from "../../design-system/components/Button/Button"
+import { Input } from "@medicycle/ui"
+import { Button } from "@medicycle/ui"
 import { Loader2, ArrowLeft, MailCheck } from "lucide-react"
 
 export function ForgotPassword() {

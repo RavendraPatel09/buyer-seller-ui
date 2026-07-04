@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { cn } from "../../design-system/utils/cn";
+import { cn } from "@medicycle/utils";
 
 interface Tab {
   id: string;

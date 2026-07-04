@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronDown } from 'lucide-react'
-import { cn } from '../../design-system/utils/cn'
+import { cn } from "@medicycle/utils"
 
 const faqs = [
   { q: "Is MediCycle HIPAA compliant?", a: "Yes, MediCycle is fully HIPAA, GDPR, and SOC2 compliant. All PHI is encrypted at rest and in transit using military-grade encryption." },

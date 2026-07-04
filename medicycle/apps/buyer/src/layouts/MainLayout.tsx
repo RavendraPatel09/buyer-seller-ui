@@ -1,7 +1,7 @@
 import { type ReactNode } from "react"
 import { Link, useLocation } from "react-router-dom"
 import { HeartPulse, Search, Bell, ShoppingCart, User, Home, Package, Activity } from "lucide-react"
-import { cn } from "../design-system/utils/cn"
+import { cn } from "@medicycle/utils"
 
 export function MainLayout({ children }: { children: ReactNode }) {
   const location = useLocation()

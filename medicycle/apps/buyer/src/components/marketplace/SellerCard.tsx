@@ -1,6 +1,6 @@
 import { ShieldCheck, MessageCircle, Star } from "lucide-react";
 import type { Seller } from "../../lib/types/medicine";
-import { Button } from "../../design-system/components/Button/Button";
+import { Button } from "@medicycle/ui";
 
 interface SellerCardProps {
   seller: Seller;

@@ -5,8 +5,8 @@ import { Link, useNavigate } from "react-router-dom"
 import { motion } from "framer-motion"
 import { loginSchema, type LoginInput } from "../../lib/validations/auth.schema"
 import { AuthLayout } from "../../layouts/AuthLayout"
-import { Input } from "../../design-system/components/Input/Input"
-import { Button } from "../../design-system/components/Button/Button"
+import { Input } from "@medicycle/ui"
+import { Button } from "@medicycle/ui"
 import { Loader2 } from "lucide-react"
 
 export function Login() {

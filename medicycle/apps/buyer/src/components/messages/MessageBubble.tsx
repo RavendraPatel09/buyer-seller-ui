@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { format } from "date-fns";
 import { Check, CheckCheck } from "lucide-react";
-import { cn } from "../../design-system/utils/cn";
+import { cn } from "@medicycle/utils";
 import type { ChatMessage } from "../../lib/types/chat";
 import { OfferCard } from "./OfferCard";
 

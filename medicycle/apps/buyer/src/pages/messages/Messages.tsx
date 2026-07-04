@@ -2,7 +2,7 @@ import { MainLayout } from "../../layouts/MainLayout";
 import { ChatSidebar } from "../../components/messages/ChatSidebar";
 import { ChatWindow } from "../../components/messages/ChatWindow";
 import { SocketProvider, useSocket } from "../../lib/socket/SocketContext";
-import { cn } from "../../design-system/utils/cn";
+import { cn } from "@medicycle/utils";
 
 function MessagesLayout() {
   const { activeConversationId } = useSocket();

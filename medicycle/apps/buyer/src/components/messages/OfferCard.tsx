@@ -1,5 +1,5 @@
 import { Check, X, FileText } from "lucide-react";
-import { Button } from "../../design-system/components/Button/Button";
+import { Button } from "@medicycle/ui";
 import type { OfferData } from "../../lib/types/chat";
 
 interface OfferCardProps {

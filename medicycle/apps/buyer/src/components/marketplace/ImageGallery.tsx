@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Maximize2, X } from "lucide-react";
-import { cn } from "../../design-system/utils/cn";
+import { cn } from "@medicycle/utils";
 
 interface ImageGalleryProps {
   images: string[];

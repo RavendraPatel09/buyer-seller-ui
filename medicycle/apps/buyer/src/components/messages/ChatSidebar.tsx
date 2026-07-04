@@ -2,7 +2,7 @@ import { Search, Pin } from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
 import { motion, AnimatePresence } from "framer-motion";
 import { useSocket } from "../../lib/socket/SocketContext";
-import { cn } from "../../design-system/utils/cn";
+import { cn } from "@medicycle/utils";
 
 export function ChatSidebar() {
   const { conversations, activeConversationId, setActiveConversationId, isTyping } = useSocket();

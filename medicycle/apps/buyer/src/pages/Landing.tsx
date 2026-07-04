@@ -8,8 +8,8 @@ import { TimelineSection } from '../components/landing/TimelineSection'
 import { TestimonialsSection } from '../components/landing/TestimonialsSection'
 import { FAQSection } from '../components/landing/FAQSection'
 import { Footer } from '../components/landing/Footer'
-import { Navbar } from '../design-system/components/Navigation/Navbar'
-import { Button } from '../design-system/components/Button/Button'
+import { Navbar } from "@medicycle/ui"
+import { Button } from "@medicycle/ui"
 import { HeartPulse } from 'lucide-react'
 
 export function Landing() {

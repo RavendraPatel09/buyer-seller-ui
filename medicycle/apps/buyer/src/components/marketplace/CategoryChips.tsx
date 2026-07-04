@@ -1,4 +1,4 @@
-import { cn } from "../../design-system/utils/cn";
+import { cn } from "@medicycle/utils";
 
 const categories = ["All", "Cardiology", "Neurology", "Oncology", "Pediatrics", "Dermatology", "General"];
 

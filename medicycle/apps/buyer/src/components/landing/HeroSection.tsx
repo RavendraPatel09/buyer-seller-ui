@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { Button } from '../../design-system/components/Button/Button'
+import { Button } from "@medicycle/ui"
 
 gsap.registerPlugin(ScrollTrigger)
 

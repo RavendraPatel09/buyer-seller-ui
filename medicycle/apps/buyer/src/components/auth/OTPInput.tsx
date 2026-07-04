@@ -1,5 +1,5 @@
 import React, { useRef } from "react"
-import { cn } from "../../design-system/utils/cn"
+import { cn } from "@medicycle/utils"
 
 interface OTPInputProps {
   length?: number

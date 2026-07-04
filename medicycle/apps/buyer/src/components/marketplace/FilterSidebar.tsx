@@ -1,5 +1,5 @@
 import { SlidersHorizontal, Check } from "lucide-react";
-import { cn } from "../../design-system/utils/cn";
+import { cn } from "@medicycle/utils";
 
 interface FilterSidebarProps {
   sort: string;
