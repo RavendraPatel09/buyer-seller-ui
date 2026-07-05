@@ -10,8 +10,14 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^5.4.0",
+    "@medicycle/hooks": "*",
+    "@medicycle/theme": "*",
+    "@medicycle/types": "*",
+    "@medicycle/ui": "*",
+    "@medicycle/utils": "*",
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.6.1",
+    "@react-three/postprocessing": "^3.0.4",
     "@tanstack/react-query": "^5.101.2",
     "axios": "^1.18.1",
     "clsx": "^2.1.1",
@@ -29,12 +35,7 @@
     "socket.io-client": "^4.8.3",
     "tailwind-merge": "^3.6.0",
     "three": "^0.185.1",
-    "zod": "^4.4.3",
-    "@medicycle/ui": "*",
-    "@medicycle/utils": "*",
-    "@medicycle/theme": "*",
-    "@medicycle/types": "*",
-    "@medicycle/hooks": "*"
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.3.2",

@@ -89,9 +89,7 @@ function Molecules() {
         <bufferGeometry>
           <bufferAttribute
             attach="attributes-position"
-            count={24}
-            array={new Float32Array([...Array(72)].map(() => (Math.random() - 0.5) * 8))}
-            itemSize={3}
+            args={[new Float32Array([...Array(72)].map(() => (Math.random() - 0.5) * 8)), 3]}
           />
         </bufferGeometry>
         <lineBasicMaterial color="#3399ff" transparent opacity={0.2} />

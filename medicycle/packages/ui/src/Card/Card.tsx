@@ -1,8 +1,8 @@
 import * as React from "react"
-import { motion, useMotionTemplate, useMotionValue, useSpring } from "framer-motion"
+import { motion, useMotionTemplate, useMotionValue, useSpring, HTMLMotionProps } from "framer-motion"
 import { cn } from "@medicycle/utils"
 
-export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface CardProps extends HTMLMotionProps<"div"> {
   glass?: boolean
   interactive?: boolean
 }
