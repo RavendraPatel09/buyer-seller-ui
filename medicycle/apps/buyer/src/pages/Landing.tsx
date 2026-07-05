@@ -6,17 +6,17 @@ import { FeaturesSection } from '../components/landing/FeaturesSection'
 import { TestimonialsSection } from '../components/landing/TestimonialsSection'
 import { FAQSection } from '../components/landing/FAQSection'
 import { Footer } from '../components/landing/Footer'
-import { Navbar } from "@medicycle/ui"
-import { Button } from "@medicycle/ui"
+import { Navbar, Button } from "@medicycle/ui"
 import { Link } from 'react-router-dom'
 import { CommandPalette } from '../components/landing/CommandPalette'
 import { useTheme } from '../lib/theme/ThemeContext'
 import { MoonStar, SunMedium } from 'lucide-react'
+import { motion } from 'framer-motion'
 
 const navItems = [
-  { label: 'Capabilities', href: '#features' },
-  { label: 'Proof', href: '#proof' },
-  { label: 'Stories', href: '#stories' },
+  { label: 'Platform', href: '#features' },
+  { label: 'Network', href: '#proof' },
+  { label: 'Testimonials', href: '#stories' },
 ]
 
 export function Landing() {
@@ -27,57 +27,72 @@ export function Landing() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-background text-foreground selection:bg-primary/30">
-      <Navbar className="bg-background/70 border-b-0 px-4 sm:px-6 lg:px-8">
+    <div className="relative min-h-screen bg-background text-foreground selection:bg-primary/30 overflow-hidden">
+      {/* Global Noise Texture */}
+      <div className="pointer-events-none fixed inset-0 z-50 mix-blend-overlay opacity-20 bg-[url('data:image/svg+xml,%3Csvg viewBox=%220 0 256 256%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noise%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.85%22 numOctaves=%224%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noise)%22 opacity=%221%22/%3E%3C/svg%3E')]" />
+
+      <Navbar showProgress className="max-w-[1400px] mx-auto left-0 right-0 top-4 rounded-[24px] border border-border/50">
         <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-2xl border border-primary/20 bg-primary/10 text-primary shadow-depth-1">
-            <svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-primary/20 bg-primary/10 text-primary shadow-glow-sm">
+            <svg width="20" height="20" viewBox="0 0 16 16" fill="none" aria-hidden="true">
               <path d="M8 1L10 5H14L11 8L12 12L8 10L4 12L5 8L2 5H6L8 1Z" fill="currentColor" />
             </svg>
           </div>
           <div>
-            <p className="font-display text-[1rem] font-semibold tracking-tight">MediCycle</p>
-            <p className="text-[11px] uppercase tracking-[0.28em] text-muted-foreground">Studio Supply OS</p>
+            <p className="font-display text-[1.1rem] font-bold tracking-tight">MediCycle</p>
           </div>
         </div>
 
-        <div className="flex items-center gap-2 sm:gap-3">
-          <nav className="hidden md:flex items-center gap-1 rounded-full border border-border/70 bg-card/70 px-2 py-1.5 shadow-depth-1">
-            {navItems.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                className="rounded-full px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
-              >
-                {item.label}
-              </a>
-            ))}
-          </nav>
+        {/* Center Navigation */}
+        <nav className="hidden md:flex items-center justify-center absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+          {navItems.map((item) => (
+            <a
+              key={item.label}
+              href={item.href}
+              className="relative px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground group"
+            >
+              {item.label}
+              <motion.div className="absolute bottom-0 left-4 right-4 h-[2px] bg-primary scale-x-0 group-hover:scale-x-100 transition-transform origin-center" />
+            </a>
+          ))}
+        </nav>
+
+        <div className="flex items-center gap-3 z-10">
           <Button
             variant="ghost"
-            size="sm"
-            className="hidden rounded-full px-3 sm:inline-flex"
+            size="icon"
+            className="hidden sm:inline-flex rounded-xl"
             onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
           >
-            {resolvedTheme === 'dark' ? <SunMedium className="h-4 w-4" /> : <MoonStar className="h-4 w-4" />}
+            {resolvedTheme === 'dark' ? <SunMedium className="h-5 w-5" /> : <MoonStar className="h-5 w-5" />}
           </Button>
           <CommandPalette />
-          <Link to="/login">
-            <Button variant="ghost" size="sm" className="rounded-full px-4 text-muted-foreground">Sign in</Button>
+          <Link to="/login" className="hidden sm:block">
+            <Button variant="ghost" size="sm" className="font-semibold">Sign in</Button>
           </Link>
           <Link to="/register">
-            <Button size="sm" className="rounded-full px-5">Get Started</Button>
+            <Button size="sm" className="rounded-xl shadow-premium">Get Started</Button>
           </Link>
         </div>
       </Navbar>
 
-      <main>
+      <main className="relative z-10 flex flex-col items-center">
         <HeroSection />
-        <TrustedCompanies />
-        <StatsSection />
-        <FeaturesSection />
-        <TestimonialsSection />
-        <FAQSection />
+        
+        {/* Alternate dark gradients between sections */}
+        <div className="w-full relative py-20 bg-[radial-gradient(ellipse_at_center,rgba(var(--glow-rgb),0.05)_0%,transparent_70%)]">
+          <TrustedCompanies />
+          <StatsSection />
+        </div>
+        
+        <div className="w-full bg-background relative z-10">
+          <FeaturesSection />
+        </div>
+        
+        <div className="w-full relative py-20 bg-[radial-gradient(ellipse_at_top,rgba(var(--glow-rgb),0.03)_0%,transparent_80%)]">
+          <TestimonialsSection />
+          <FAQSection />
+        </div>
       </main>
 
       <Footer />
