@@ -11,59 +11,71 @@ const data = [
   { name: 'Sun', revenue: 10490 },
 ];
 
+const CustomTooltip = ({ active, payload, label }: any) => {
+  if (active && payload && payload.length) {
+    return (
+      <div className="glass-panel-heavy border border-border px-4 py-3 rounded-2xl shadow-premium">
+        <p className="text-muted-foreground text-xs font-medium mb-1 uppercase tracking-wider">{label}</p>
+        <p className="text-primary font-mono text-lg font-bold">
+          ${payload[0].value.toLocaleString()}
+        </p>
+      </div>
+    );
+  }
+  return null;
+};
+
 export function RevenueChart() {
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ delay: 0.2, duration: 0.5 }}
-      className="bg-card border border-border/50 rounded-3xl p-6 h-[400px] flex flex-col"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.2, duration: 0.5, type: "spring", stiffness: 400, damping: 30 }}
+      className="glass-panel border border-border/50 rounded-[24px] p-6 lg:p-8 h-[400px] flex flex-col shadow-premium relative overflow-hidden"
     >
-      <div className="mb-6">
-        <h3 className="text-lg font-bold">Revenue Overview</h3>
-        <p className="text-sm text-muted-foreground">Your earnings over the last 7 days</p>
+      {/* Internal Glass Reflection */}
+      <div className="absolute inset-0 rounded-[24px] pointer-events-none border border-white/5 z-20 mix-blend-overlay" />
+
+      <div className="mb-8 relative z-10">
+        <h3 className="text-xl font-display font-bold">Revenue Overview</h3>
+        <p className="text-sm text-muted-foreground mt-1">Your earnings over the last 7 days</p>
       </div>
       
-      <div className="flex-1 w-full min-h-0">
+      <div className="flex-1 w-full min-h-0 relative z-10">
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart data={data} margin={{ top: 10, right: 0, left: -20, bottom: 0 }}>
             <defs>
               <linearGradient id="colorRevenue" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="var(--color-primary)" stopOpacity={0.3}/>
-                <stop offset="95%" stopColor="var(--color-primary)" stopOpacity={0}/>
+                <stop offset="5%" stopColor="hsl(var(--primary))" stopOpacity={0.3}/>
+                <stop offset="95%" stopColor="hsl(var(--primary))" stopOpacity={0}/>
               </linearGradient>
             </defs>
-            <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" vertical={false} opacity={0.5} />
+            <CartesianGrid strokeDasharray="4 4" stroke="hsl(var(--border))" vertical={false} opacity={0.4} />
             <XAxis 
               dataKey="name" 
-              stroke="var(--color-muted-foreground)" 
+              stroke="hsl(var(--muted-foreground))" 
               fontSize={12}
               tickLine={false}
               axisLine={false}
+              dy={10}
             />
             <YAxis 
-              stroke="var(--color-muted-foreground)" 
+              stroke="hsl(var(--muted-foreground))" 
               fontSize={12}
               tickLine={false}
               axisLine={false}
               tickFormatter={(value) => `$${value}`}
+              dx={-10}
             />
-            <Tooltip 
-              contentStyle={{ 
-                backgroundColor: 'var(--color-card)', 
-                borderColor: 'var(--color-border)',
-                borderRadius: '12px',
-                boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1)'
-              }}
-              itemStyle={{ color: 'var(--color-primary)' }}
-            />
+            <Tooltip content={<CustomTooltip />} cursor={{ stroke: 'hsl(var(--primary))', strokeWidth: 1, strokeDasharray: '4 4' }} />
             <Area 
               type="monotone" 
               dataKey="revenue" 
-              stroke="var(--color-primary)" 
+              stroke="hsl(var(--primary))" 
               strokeWidth={3}
               fillOpacity={1} 
-              fill="url(#colorRevenue)" 
+              fill="url(#colorRevenue)"
+              style={{ filter: "drop-shadow(0px 4px 8px rgba(var(--glow-rgb), 0.3))" }}
             />
           </AreaChart>
         </ResponsiveContainer>
