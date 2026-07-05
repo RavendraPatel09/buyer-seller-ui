@@ -1,98 +1,100 @@
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,300,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 /* ─────────────────────────────────────────────
-   Bio-Precision Design System — MediCycle
+   Premium Billion-Dollar SaaS Design System
    ───────────────────────────────────────────── */
 
 @layer base {
   :root {
     /* Surfaces */
-    --background: 220 16% 97%;
-    --foreground: 225 24% 8%;
+    --background: 0 0% 100%;
+    --foreground: 0 0% 9%;
     --card: 0 0% 100%;
-    --card-foreground: 225 24% 8%;
+    --card-foreground: 0 0% 9%;
     --popover: 0 0% 100%;
-    --popover-foreground: 225 24% 8%;
+    --popover-foreground: 0 0% 9%;
 
-    /* Brand — Light mode uses a deeper, grounded green */
-    --primary: 142 72% 37%;
+    /* Brand — Electric Blue */
+    --primary: 212 100% 48%;
     --primary-foreground: 0 0% 100%;
 
     /* Neutral Surfaces */
-    --secondary: 225 14% 95%;
-    --secondary-foreground: 225 24% 8%;
-    --muted: 225 14% 95%;
-    --muted-foreground: 228 15% 50%;
-    --accent: 225 14% 95%;
-    --accent-foreground: 225 24% 8%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
 
     /* Semantic */
-    --destructive: 0 72% 51%;
-    --destructive-foreground: 0 0% 100%;
-    --warning: 39 100% 57%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --warning: 38 92% 50%;
 
     /* Edges */
-    --border: 225 16% 90%;
-    --input: 225 16% 90%;
-    --ring: 142 72% 37%;
-    --radius: 0.625rem;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 212 100% 48%;
+    --radius: 24px;
 
     /* Glass */
     --glass: 255, 255, 255;
     --glass-border: 0, 0, 0;
 
     /* Glow */
-    --glow-color: 142, 72%, 37%;
-    --glow-rgb: 22, 163, 74;
+    --glow-color: 212, 100%, 48%;
+    --glow-rgb: 0, 112, 243;
 
     /* Surfaces */
-    --surface-raised: 225 16% 95%;
+    --surface-raised: 210 40% 98%;
   }
 
   .dark {
-    --background: 225 20% 4%;
-    --foreground: 220 33% 93%;
-    --card: 225 24% 7.5%;
-    --card-foreground: 220 33% 93%;
-    --popover: 225 24% 7.5%;
-    --popover-foreground: 220 33% 93%;
+    /* Linear/Vercel Deep Dark */
+    --background: 0 0% 4%;
+    --foreground: 0 0% 93%;
+    --card: 0 0% 6%;
+    --card-foreground: 0 0% 93%;
+    --popover: 0 0% 6%;
+    --popover-foreground: 0 0% 93%;
 
-    /* Brand — phosphor green, vivid in dark */
-    --primary: 147 100% 61%;
-    --primary-foreground: 225 24% 7.5%;
+    /* Brand — Vivid Blue */
+    --primary: 212 100% 60%;
+    --primary-foreground: 0 0% 100%;
 
     /* Neutral Surfaces */
-    --secondary: 226 23% 11%;
-    --secondary-foreground: 220 33% 93%;
-    --muted: 226 23% 11%;
-    --muted-foreground: 228 15% 50%;
-    --accent: 226 23% 11%;
-    --accent-foreground: 220 33% 93%;
+    --secondary: 0 0% 9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 9%;
+    --muted-foreground: 0 0% 63%;
+    --accent: 0 0% 9%;
+    --accent-foreground: 0 0% 98%;
 
     /* Semantic */
-    --destructive: 350 100% 65%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-    --warning: 39 100% 57%;
+    --warning: 38 92% 50%;
 
     /* Edges */
-    --border: 227 24% 15.5%;
-    --input: 227 24% 15.5%;
-    --ring: 147 100% 61%;
+    --border: 0 0% 14%;
+    --input: 0 0% 14%;
+    --ring: 212 100% 60%;
 
     /* Glass */
-    --glass: 15, 17, 23;
-    --glass-border: 232, 236, 244;
+    --glass: 20, 20, 20;
+    --glass-border: 255, 255, 255;
 
     /* Glow */
-    --glow-color: 147, 100%, 61%;
-    --glow-rgb: 57, 255, 133;
+    --glow-color: 212, 100%, 60%;
+    --glow-rgb: 51, 153, 255;
 
     /* Surfaces */
-    --surface-raised: 224 19% 11%;
+    --surface-raised: 0 0% 10%;
   }
 }
 
@@ -116,18 +118,10 @@
     letter-spacing: -0.01em;
   }
 
-  /* Ambient dot grid background */
-  .dark body {
-    background-image:
-      radial-gradient(circle at 1px 1px, hsl(var(--border)) 1px, transparent 0);
-    background-size: 32px 32px;
-    background-attachment: fixed;
-  }
-
   /* Typography classes */
   .font-display {
-    font-family: 'Instrument Sans', system-ui, sans-serif;
-    letter-spacing: -0.035em;
+    font-family: 'Satoshi', system-ui, sans-serif;
+    letter-spacing: -0.02em;
   }
 
   .font-mono {
@@ -152,7 +146,7 @@
   :focus-visible {
     outline: 2px solid hsl(var(--ring));
     outline-offset: 2px;
-    border-radius: var(--radius);
+    border-radius: calc(var(--radius) / 2);
   }
 
   /* Custom selection */
@@ -190,42 +184,48 @@
     border: 1px solid hsl(var(--border));
   }
 
-  /* ── Glass Panels ── */
+  /* ── Premium Glass Panels ── */
   .glass-panel {
-    background-color: rgba(var(--glass), 0.06);
+    background-color: rgba(var(--glass), 0.03);
     backdrop-filter: blur(24px) saturate(180%);
     -webkit-backdrop-filter: blur(24px) saturate(180%);
     border: 1px solid rgba(var(--glass-border), 0.08);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.12);
+    box-shadow: 
+      0 8px 32px 0 rgba(0, 0, 0, 0.2),
+      inset 0 1px 1px 0 rgba(255, 255, 255, 0.1);
   }
 
-  .glass-panel-sm {
-    background-color: rgba(var(--glass), 0.06);
-    backdrop-filter: blur(16px) saturate(150%);
-    -webkit-backdrop-filter: blur(16px) saturate(150%);
-    border: 1px solid rgba(var(--glass-border), 0.06);
+  .glass-panel-heavy {
+    background-color: rgba(var(--glass), 0.08);
+    backdrop-filter: blur(40px) saturate(200%);
+    -webkit-backdrop-filter: blur(40px) saturate(200%);
+    border: 1px solid rgba(var(--glass-border), 0.12);
+    box-shadow: 
+      0 12px 48px 0 rgba(0, 0, 0, 0.3),
+      inset 0 1px 2px 0 rgba(255, 255, 255, 0.15);
   }
 
   /* ── Glow Effects ── */
   .glow {
     box-shadow: 0 0 24px rgba(var(--glow-rgb), 0.25),
-                0 0 48px rgba(var(--glow-rgb), 0.08);
+                0 0 48px rgba(var(--glow-rgb), 0.1);
   }
 
   .glow-sm {
-    box-shadow: 0 0 12px rgba(var(--glow-rgb), 0.2);
+    box-shadow: 0 0 16px rgba(var(--glow-rgb), 0.2);
   }
 
   .glow-text {
-    text-shadow: 0 0 20px rgba(var(--glow-rgb), 0.4);
+    text-shadow: 0 0 24px rgba(var(--glow-rgb), 0.5);
   }
 
-  /* ── Border Utilities ── */
-  .border-hairline {
-    border-width: 0.5px;
+  .glow-border {
+    border-color: rgba(var(--glow-rgb), 0.4);
+    box-shadow: 0 0 20px rgba(var(--glow-rgb), 0.15),
+                inset 0 0 10px rgba(var(--glow-rgb), 0.05);
   }
 
-  /* ── Gradient Utilities ── */
+  /* ── Gradients ── */
   .gradient-text {
     background: linear-gradient(
       180deg,
@@ -241,7 +241,7 @@
     background: linear-gradient(
       135deg,
       hsl(var(--primary)) 0%,
-      hsl(var(--primary) / 0.7) 100%
+      hsl(var(--primary) / 0.8) 100%
     );
   }
 
@@ -250,27 +250,27 @@
     content: '';
     position: absolute;
     inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.02'/%3E%3C/svg%3E");
     pointer-events: none;
     border-radius: inherit;
-    z-index: 1;
+    z-index: 0;
   }
 
-  /* ── Shadow System ── */
-  .shadow-depth-1 {
+  /* ── Shadow System (Linear/Vercel style) ── */
+  .shadow-premium {
     box-shadow:
-      0 1px 2px rgba(0, 0, 0, 0.06),
-      0 1px 3px rgba(0, 0, 0, 0.1);
+      0 0 0 1px rgba(0, 0, 0, 0.05),
+      0 1px 2px 0 rgba(0, 0, 0, 0.1),
+      0 4px 12px 0 rgba(0, 0, 0, 0.1),
+      0 16px 32px 0 rgba(0, 0, 0, 0.1);
   }
-  .shadow-depth-2 {
+  
+  .dark .shadow-premium {
     box-shadow:
-      0 4px 6px -1px rgba(0, 0, 0, 0.08),
-      0 2px 4px -2px rgba(0, 0, 0, 0.06);
-  }
-  .shadow-depth-3 {
-    box-shadow:
-      0 10px 15px -3px rgba(0, 0, 0, 0.08),
-      0 4px 6px -4px rgba(0, 0, 0, 0.06);
+      0 0 0 1px rgba(255, 255, 255, 0.05),
+      0 1px 2px 0 rgba(0, 0, 0, 0.3),
+      0 4px 12px 0 rgba(0, 0, 0, 0.4),
+      0 16px 32px 0 rgba(0, 0, 0, 0.5);
   }
 
   /* ── Animation Utilities ── */
@@ -282,20 +282,11 @@
   .animate-shimmer {
     background: linear-gradient(
       90deg,
-      hsl(var(--muted)) 0%,
-      hsl(var(--surface-raised)) 50%,
-      hsl(var(--muted)) 100%
+      transparent 0%,
+      rgba(255,255,255,0.03) 50%,
+      transparent 100%
     );
     background-size: 200% 100%;
-    animation: shimmer 1.5s ease-in-out infinite;
-  }
-
-  @keyframes pulse-glow {
-    0%, 100% { box-shadow: 0 0 12px rgba(var(--glow-rgb), 0.15); }
-    50% { box-shadow: 0 0 24px rgba(var(--glow-rgb), 0.35); }
-  }
-
-  .animate-pulse-glow {
-    animation: pulse-glow 2s ease-in-out infinite;
+    animation: shimmer 2s infinite linear;
   }
 }
