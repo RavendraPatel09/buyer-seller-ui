@@ -1,28 +1,28 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronDown } from 'lucide-react'
-import { cn } from "@medicycle/utils"
+import { cn } from '@medicycle/utils'
 
 const faqs = [
   {
-    q: "How does MediCycle ensure medicine authenticity?",
-    a: "Every listed medicine is verified through our multi-step authentication process including batch verification, FSSAI compliance checks, and seller KYC. We maintain a complete chain of custody from manufacturer to buyer."
+    q: 'How does MediCycle ensure medicine authenticity?',
+    a: 'Every listed medicine is verified through a multi-step authentication process, including batch verification, license checks, and a chain-of-custody audit from manufacturer to buyer.',
   },
   {
-    q: "What happens if a medicine is near expiry?",
-    a: "Our smart inventory system automatically flags near-expiry items and offers them at discounted rates through our redistribution network, reducing waste by up to 40%. Buyers are always clearly informed of expiry dates."
+    q: 'What happens if a medicine is near expiry?',
+    a: 'Near-expiry inventory is surfaced automatically, then routed through our redistribution network so waste drops while buyers still see clear expiry information.',
   },
   {
-    q: "Is my transaction data secure?",
-    a: "All transactions use bank-grade AES-256 encryption. We're SOC2 Type II certified and HIPAA-ready. Your financial and medical procurement data is never shared with third parties."
+    q: 'Is transaction data secure?',
+    a: 'All transactions use encrypted communication rails and auditable account controls, with compliance workflows designed for sensitive procurement and clinical operations.',
   },
   {
-    q: "How do I become a verified seller?",
-    a: "Submit your pharmacy license, GST registration, and drug license through our onboarding flow. Verification typically completes within 24-48 hours. Once approved, you can list inventory immediately."
+    q: 'How do I become a verified seller?',
+    a: 'Submit your licensing documents through our onboarding flow and verification typically completes within 24–48 hours.',
   },
   {
-    q: "Can I integrate MediCycle with my existing ERP?",
-    a: "Yes. We offer REST APIs and pre-built integrations for SAP, Oracle Health, and most major pharmacy management systems. Our developer documentation covers everything you need."
+    q: 'Can MediCycle integrate with existing ERP systems?',
+    a: 'Yes. We offer API-first integration paths and onboarding tooling that supports common procurement and inventory systems.',
   },
 ]
 
@@ -30,59 +30,53 @@ export function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
 
   return (
-    <section className="py-24 md:py-32 relative z-10">
-      <div className="container mx-auto px-6 lg:px-8 max-w-3xl">
+    <section className="relative z-10 py-24 md:py-32">
+      <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ type: "spring", stiffness: 100, damping: 20 }}
-          className="text-center mb-16"
+          transition={{ type: 'spring', stiffness: 120, damping: 18 }}
+          className="mb-12 text-center"
         >
-          <p className="text-sm font-mono font-medium text-primary uppercase tracking-widest mb-3">FAQ</p>
-          <h2 className="font-display text-3xl md:text-4xl font-bold tracking-tight">
-            Common questions
+          <p className="mb-3 font-mono text-[11px] uppercase tracking-[0.28em] text-primary">FAQ</p>
+          <h2 className="font-display text-3xl leading-tight sm:text-4xl">
+            Questions that matter in critical moments.
           </h2>
         </motion.div>
 
-        <div className="divide-y divide-border">
-          {faqs.map((faq, i) => (
+        <div className="rounded-[1.7rem] border border-border/70 bg-card/50 p-2 shadow-depth-1">
+          {faqs.map((faq, index) => (
             <motion.div
-              key={i}
+              key={index}
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.05 }}
+              transition={{ delay: index * 0.04 }}
+              className="border-b border-border/60 last:border-b-0"
             >
               <button
-                onClick={() => setOpenIndex(openIndex === i ? null : i)}
-                className="w-full py-5 flex items-center justify-between text-left group"
+                type="button"
+                onClick={() => setOpenIndex(openIndex === index ? null : index)}
+                className="flex w-full items-center justify-between gap-4 py-5 pl-3 pr-2 text-left"
               >
-                <span className={cn(
-                  "text-sm md:text-base font-medium pr-8 transition-colors",
-                  openIndex === i ? "text-foreground" : "text-muted-foreground group-hover:text-foreground"
-                )}>
+                <span className={cn('pr-6 text-sm font-semibold transition-colors md:text-base', openIndex === index ? 'text-foreground' : 'text-muted-foreground hover:text-foreground')}>
                   {faq.q}
                 </span>
-                <motion.div
-                  animate={{ rotate: openIndex === i ? 180 : 0 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 25 }}
-                >
-                  <ChevronDown className="w-4 h-4 text-muted-foreground shrink-0" />
+                <motion.div animate={{ rotate: openIndex === index ? 180 : 0 }} transition={{ type: 'spring', stiffness: 280, damping: 24 }}>
+                  <ChevronDown className="h-4 w-4 shrink-0 text-muted-foreground" />
                 </motion.div>
               </button>
               <AnimatePresence>
-                {openIndex === i && (
+                {openIndex === index && (
                   <motion.div
                     initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
+                    animate={{ height: 'auto', opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
-                    transition={{ type: "spring", stiffness: 200, damping: 25 }}
+                    transition={{ type: 'spring', stiffness: 220, damping: 24 }}
                     className="overflow-hidden"
                   >
-                    <p className="pb-5 text-sm text-muted-foreground leading-relaxed pr-12">
-                      {faq.a}
-                    </p>
+                    <p className="pb-5 pl-3 pr-12 text-sm leading-7 text-muted-foreground">{faq.a}</p>
                   </motion.div>
                 )}
               </AnimatePresence>
