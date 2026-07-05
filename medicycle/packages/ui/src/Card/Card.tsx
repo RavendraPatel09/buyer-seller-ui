@@ -1,8 +1,8 @@
 import * as React from "react"
-import { motion, useMotionTemplate, useMotionValue, useSpring, HTMLMotionProps } from "framer-motion"
+import { motion, useMotionTemplate, useMotionValue, useSpring } from "framer-motion"
 import { cn } from "@medicycle/utils"
 
-export interface CardProps extends HTMLMotionProps<"div"> {
+export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   glass?: boolean
   interactive?: boolean
 }
@@ -37,15 +37,15 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
       return (
         <motion.div
           ref={ref as any}
-          onMouseMove={handleMouseMove}
-          onMouseLeave={handleMouseLeave}
+          onMouseMove={handleMouseMove as any}
+          onMouseLeave={handleMouseLeave as any}
           whileHover={{ scale: 1.03, y: -4 }}
           transition={{ type: "spring", stiffness: 400, damping: 25 }}
           className={cn(
             baseClasses,
             "transition-colors duration-200 hover:border-primary/40 hover:glow-sm group"
           )}
-          {...props}
+          {...(props as any)}
         >
           {/* Internal Glass Reflection */}
           <div className="absolute inset-0 rounded-[24px] pointer-events-none border border-white/5 z-20 mix-blend-overlay" />

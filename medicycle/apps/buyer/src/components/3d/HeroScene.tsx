@@ -169,7 +169,7 @@ export function HeroScene() {
 
         <Scene />
 
-        <EffectComposer disableNormalPass>
+        <EffectComposer>
           <Bloom luminanceThreshold={0.5} mipmapBlur intensity={1.5} />
           <DepthOfField focusDistance={0} focalLength={0.02} bokehScale={2} height={480} />
           <Noise opacity={0.03} />
